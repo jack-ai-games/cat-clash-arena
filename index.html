@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cat Clash Arena - Compete with players, team up, and climb the leaderboard!">
+    <meta name="description" content="Cat Clash Arena - Compete with players, team up, and rise on the leaderboard!">
     <title>Cat Clash Arena</title>
     <style>
         body {
@@ -31,14 +31,23 @@
             margin: 1rem 0;
             text-align: center;
         }
-        .leaderboard, .ads {
+        .leaderboard {
             background-color: #fff;
             border: 1px solid #ddd;
             padding: 1rem;
             margin: 1rem 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .leaderboard h2 {
+            margin-top: 0;
         }
         .ads {
             background-color: #fafafa;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 1rem 0;
+            display: none; /* Ads moved inside the game screen, can show later */
         }
         footer {
             text-align: center;
@@ -56,44 +65,63 @@
             border: none;
             cursor: pointer;
         }
+        .game-modes {
+            margin: 1rem 0;
+        }
+        .game-modes button {
+            padding: 10px 20px;
+            margin: 0.5rem;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Welcome to Cat Clash Arena</h1>
-    <p>Team up, compete, and rise to the top!</p>
+    <p>Team up, compete, or challenge bots in map mode!</p>
 </header>
 
 <!-- Game Area -->
 <section class="game-area" id="game-area">
-    <h2>Game Area</h2>
-    <p>This is where the actual game will be played!</p>
+    <h2>Main Game Screen</h2>
+    <p>Choose your mode and start playing!</p>
+
+    <!-- Game Modes -->
+    <div class="game-modes">
+        <button id="play-vs-btn">Play PvP</button>
+        <button id="play-map-btn">Map Mode (Bots)</button>
+    </div>
+
+    <!-- Leaderboard inside the game screen -->
+    <div class="leaderboard" id="leaderboard">
+        <h2>Player Leaderboard</h2>
+        <ul>
+            <li>Player 1 - 1200 points</li>
+            <li>Player 2 - 1150 points</li>
+            <li>Player 3 - 1100 points</li>
+            <!-- Add more players dynamically -->
+        </ul>
+    </div>
+
+    <!-- Fullscreen Button -->
     <button id="fullscreen-btn">Go Fullscreen</button>
+
 </section>
 
 <!-- Sponsored Ads -->
 <section class="ads">
     <h2>Sponsored Ads</h2>
-    <p>We keep the ads minimal! Check out these cool offers:</p>
+    <p>Check out these offers:</p>
     <div class="ad">
         <p><a href="#">Ad 1 - Amazing Deal on Cat Supplies!</a></p>
     </div>
     <div class="ad">
-        <p><a href="#">Ad 2 - Join our game tournaments for extra prizes!</a></p>
+        <p><a href="#">Ad 2 - Join game tournaments for extra prizes!</a></p>
     </div>
-</section>
-
-<!-- Leaderboard Section -->
-<section class="leaderboard">
-    <h2>Player Leaderboard</h2>
-    <p>Check out the top players dominating the arena:</p>
-    <ul>
-        <li>Player 1 - 1200 points</li>
-        <li>Player 2 - 1150 points</li>
-        <li>Player 3 - 1100 points</li>
-        <!-- Add more players dynamically -->
-    </ul>
 </section>
 
 <footer>
@@ -101,11 +129,15 @@
     <p>Follow us on <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
 </footer>
 
-<!-- JavaScript for Fullscreen -->
+<!-- JavaScript for Fullscreen and Game Modes -->
 <script>
     const fullscreenButton = document.getElementById('fullscreen-btn');
     const gameArea = document.getElementById('game-area');
+    const playVsButton = document.getElementById('play-vs-btn');
+    const playMapButton = document.getElementById('play-map-btn');
+    const leaderboard = document.getElementById('leaderboard');
 
+    // Fullscreen toggle
     fullscreenButton.addEventListener('click', () => {
         if (document.fullscreenElement) {
             document.exitFullscreen();
@@ -115,7 +147,21 @@
             });
         }
     });
+
+    // Event listener for Play PvP button
+    playVsButton.addEventListener('click', () => {
+        alert('PvP mode starting...');
+        // Start the PvP game mode logic
+    });
+
+    // Event listener for Play Map Mode (Bots)
+    playMapButton.addEventListener('click', () => {
+        alert('Map Mode with Bots starting...');
+        // Start the Map mode with bots logic
+        // Increase difficulty each time a level is beaten
+    });
 </script>
 
 </body>
 </html>
+
