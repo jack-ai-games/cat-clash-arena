@@ -67,6 +67,14 @@
             border: none;
             cursor: pointer;
         }
+        .shop-btn {
+            background-color: #FFA500;
+            padding: 10px 20px;
+            margin: 0.5rem;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -85,6 +93,7 @@
     <div class="game-modes">
         <button id="play-vs-btn">Play PvP</button>
         <button id="play-map-btn">Map Mode (Bots)</button>
+        <button class="shop-btn" id="shop-btn">Shop</button>
     </div>
 
     <!-- Fullscreen Button -->
@@ -120,12 +129,13 @@
     <p>Follow us on <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
 </footer>
 
-<!-- JavaScript for Fullscreen and Game Modes -->
+<!-- JavaScript for Fullscreen, Shop, and Game Modes -->
 <script>
     const fullscreenButton = document.getElementById('fullscreen-btn');
     const gameArea = document.getElementById('game-area');
     const playVsButton = document.getElementById('play-vs-btn');
     const playMapButton = document.getElementById('play-map-btn');
+    const shopButton = document.getElementById('shop-btn');
 
     // Fullscreen toggle function
     function toggleFullscreen(element) {
@@ -154,6 +164,12 @@
         alert('Map Mode with Bots starting...');
         // Start the Map mode with bots logic
         // Increase difficulty each time a level is beaten
+    });
+
+    // Event listener for Shop button
+    shopButton.addEventListener('click', () => {
+        alert('Opening the Shop...');
+        // Open the shop functionality for purchasing items or upgrades
     });
 </script>
 
