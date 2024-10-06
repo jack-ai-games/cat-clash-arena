@@ -24,7 +24,14 @@
         h1, h2 {
             color: #333;
         }
-        .game-area, .leaderboard, .shop, .ads {
+        .game-area {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .leaderboard, .ads {
             background-color: #fff;
             border: 1px solid #ddd;
             padding: 1rem;
@@ -52,7 +59,7 @@
         .game-modes {
             margin: 1rem 0;
         }
-        .game-modes button, .shop button {
+        .game-modes button {
             padding: 10px 20px;
             margin: 0.5rem;
             background-color: #008CBA;
@@ -60,18 +67,13 @@
             border: none;
             cursor: pointer;
         }
-        .shop-item {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
 
 <header>
     <h1>Welcome to Cat Clash Arena</h1>
-    <p>Team up with another player, compete against other teams, or challenge bots in Map Mode!</p>
+    <p>Team up, compete, or challenge bots in map mode!</p>
 </header>
 
 <!-- Game Area -->
@@ -81,53 +83,12 @@
 
     <!-- Game Modes -->
     <div class="game-modes">
-        <button id="play-vs-btn">Play Team PvP</button>
+        <button id="play-vs-btn">Play PvP</button>
         <button id="play-map-btn">Map Mode (Bots)</button>
-        <button id="open-shop-btn">Open Shop</button>
     </div>
 
     <!-- Fullscreen Button -->
     <button id="fullscreen-btn">Go Fullscreen</button>
-
-    <!-- PvP Team Status -->
-    <div id="pvp-status" style="display:none;">
-        <h3>Team PvP Battle</h3>
-        <p><strong>Team 1:</strong> Player 1 & Player 2</p>
-        <p><strong>Team 2:</strong> Player 3 & Player 4</p>
-        <p id="team1-status">Team 1 Base Health: 100%</p>
-        <p id="team2-status">Team 2 Base Health: 100%</p>
-        <button id="team1-attack">Team 1 Attack</button>
-        <button id="team2-attack">Team 2 Attack</button>
-    </div>
-
-    <!-- Map Mode Status -->
-    <div id="map-status" style="display:none;">
-        <h3>Map Mode: Battle Bots</h3>
-        <p><strong>Level:</strong> <span id="map-level">1</span></p>
-        <p id="player-health">Player Base Health: 100%</p>
-        <p id="bot-health">Bot Base Health: 100%</p>
-        <button id="attack-bots">Attack Bots</button>
-    </div>
-</section>
-
-<!-- Shop Section -->
-<section class="shop" id="shop-section" style="display:none;">
-    <h2>Shop</h2>
-    <div class="shop-item">
-        <p><strong>Buy Cat Unit:</strong> Warrior Cat</p>
-        <p>Cost: 100 coins</p>
-        <button id="buy-cat">Buy</button>
-    </div>
-    <div class="shop-item">
-        <p><strong>Upgrade Cat Unit:</strong> Warrior Cat</p>
-        <p>Cost: 200 coins (Increases damage by 10%)</p>
-        <button id="upgrade-cat">Upgrade</button>
-    </div>
-    <div class="shop-item">
-        <p><strong>Upgrade Tower Health</strong></p>
-        <p>Cost: 300 coins (Increases base health by 20%)</p>
-        <button id="upgrade-tower">Upgrade</button>
-    </div>
 </section>
 
 <!-- Leaderboard Section -->
@@ -159,33 +120,12 @@
     <p>Follow us on <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
 </footer>
 
-<!-- JavaScript for Fullscreen, Shop, and Game Modes -->
+<!-- JavaScript for Fullscreen and Game Modes -->
 <script>
     const fullscreenButton = document.getElementById('fullscreen-btn');
     const gameArea = document.getElementById('game-area');
     const playVsButton = document.getElementById('play-vs-btn');
     const playMapButton = document.getElementById('play-map-btn');
-    const openShopButton = document.getElementById('open-shop-btn');
-    const shopSection = document.getElementById('shop-section');
-    const pvpStatus = document.getElementById('pvp-status');
-    const mapStatus = document.getElementById('map-status');
-    const team1Status = document.getElementById('team1-status');
-    const team2Status = document.getElementById('team2-status');
-    const mapLevel = document.getElementById('map-level');
-    const playerHealth = document.getElementById('player-health');
-    const botHealth = document.getElementById('bot-health');
-
-    // Currency and Shop
-    let coins = 500;
-    let warriorCatLevel = 1;
-    let towerHealthBonus = 0;
-
-    // Game state
-    let team1BaseHealth = 100;
-    let team2BaseHealth = 100;
-    let playerBaseHealth = 100;
-    let botBaseHealth = 100;
-    let currentLevel = 1;
 
     // Fullscreen toggle
     fullscreenButton.addEventListener('click', () => {
@@ -198,22 +138,19 @@
         }
     });
 
-    // PvP Mode Logic (Team vs. Team)
+    // Event listener for Play PvP button
     playVsButton.addEventListener('click', () => {
-        pvpStatus.style.display = 'block';
-        mapStatus.style.display = 'none';
-        shopSection.style.display = 'none';
-        alert('Team PvP mode starting...');
+        alert('PvP mode starting...');
+        // Start the PvP game mode logic
     });
 
-    // PvP Team 1 Attacks
-    document.getElementById('team1-attack').addEventListener('click', () => {
-        team2BaseHealth -= Math.floor(Math.random() * 10) + 1;
-        team2Status.textContent = `Team 2 Base Health: ${team2BaseHealth}%`;
-        checkPvPWin();
+    // Event listener for Play Map Mode (Bots)
+    playMapButton.addEventListener('click', () => {
+        alert('Map Mode with Bots starting...');
+        // Start the Map mode with bots logic
+        // Increase difficulty each time a level is beaten
     });
+</script>
 
-    // PvP Team 2 Attacks
-    document.getElementById('team
-
-                        
+</body>
+</html>
