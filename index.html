@@ -127,15 +127,20 @@
     const playVsButton = document.getElementById('play-vs-btn');
     const playMapButton = document.getElementById('play-map-btn');
 
-    // Fullscreen toggle
-    fullscreenButton.addEventListener('click', () => {
-        if (document.fullscreenElement) {
-            document.exitFullscreen();
-        } else {
-            gameArea.requestFullscreen().catch(err => {
+    // Fullscreen toggle function
+    function toggleFullscreen(element) {
+        if (!document.fullscreenElement) {
+            element.requestFullscreen().catch(err => {
                 alert(`Error attempting to enable full-screen mode: ${err.message}`);
             });
+        } else {
+            document.exitFullscreen();
         }
+    }
+
+    // Fullscreen button event listener
+    fullscreenButton.addEventListener('click', () => {
+        toggleFullscreen(gameArea);
     });
 
     // Event listener for Play PvP button
