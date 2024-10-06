@@ -34,6 +34,192 @@
         }
         .leaderboard, .ads {
             background-color: #fff;
-            border
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .ads {
+            background-color: #fafafa;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        #fullscreen-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .game-modes {
+            margin: 1rem 0;
+        }
+        .game-modes button {
+            padding: 10px 20px;
+            margin: 0.5rem;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .shop-btn {
+            background-color: #FFA500;
+            padding: 10px 20px;
+            margin: 0.5rem;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .auth-buttons {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        .auth-buttons button {
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .auth-buttons button.signup {
+            background-color: #28A745;
+        }
 
-            
+        /* Initially hide the game modes buttons */
+        .game-modes {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to Cat Clash Arena</h1>
+    <p>Team up, compete, or challenge bots in map mode!</p>
+
+    <!-- Sign In and Sign Up Buttons -->
+    <div class="auth-buttons">
+        <button id="signin-btn">Sign In</button>
+        <button id="signup-btn" class="signup">Sign Up</button>
+    </div>
+</header>
+
+<!-- Game Area -->
+<section class="game-area" id="game-area">
+    <h2>Main Game Screen</h2>
+    <p>Click "Go Fullscreen" to reveal game modes and start playing!</p>
+
+    <!-- Fullscreen Button -->
+    <button id="fullscreen-btn">Go Fullscreen</button>
+
+    <!-- Game Modes (Initially Hidden) -->
+    <div class="game-modes" id="game-modes">
+        <button id="play-vs-btn">Play PvP</button>
+        <button id="play-map-btn">Map Mode (Bots)</button>
+        <button class="shop-btn" id="shop-btn">Shop</button>
+    </div>
+</section>
+
+<!-- Leaderboard Section -->
+<section class="leaderboard">
+    <h2>Player Leaderboard</h2>
+    <p>Check out the top players dominating the arena:</p>
+    <ul>
+        <li>Player 1 - 1200 points</li>
+        <li>Player 2 - 1150 points</li>
+        <li>Player 3 - 1100 points</li>
+        <!-- Add more players dynamically -->
+    </ul>
+</section>
+
+<!-- Sponsored Ads -->
+<section class="ads">
+    <h2>Sponsored Ads</h2>
+    <p>We keep the ads minimal! Check out these cool offers:</p>
+    <div class="ad">
+        <p><a href="#">Ad 1 - Amazing Deal on Cat Supplies!</a></p>
+    </div>
+    <div class="ad">
+        <p><a href="#">Ad 2 - Join our game tournaments for extra prizes!</a></p>
+    </div>
+</section>
+
+<footer>
+    <p>Cat Clash Arena &copy; 2024</p>
+    <p>Follow us on <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
+</footer>
+
+<!-- JavaScript for Fullscreen, Shop, and Game Modes -->
+<script>
+    const fullscreenButton = document.getElementById('fullscreen-btn');
+    const gameArea = document.getElementById('game-area');
+    const gameModes = document.getElementById('game-modes');
+    const playVsButton = document.getElementById('play-vs-btn');
+    const playMapButton = document.getElementById('play-map-btn');
+    const shopButton = document.getElementById('shop-btn');
+    const signinButton = document.getElementById('signin-btn');
+    const signupButton = document.getElementById('signup-btn');
+
+    // Fullscreen toggle function
+    function toggleFullscreen(element) {
+        if (!document.fullscreenElement) {
+            element.requestFullscreen().then(() => {
+                // Show game modes when fullscreen is activated
+                gameModes.style.display = 'block';
+            }).catch(err => {
+                alert(`Error attempting to enable full-screen mode: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+            // Hide game modes when exiting fullscreen
+            gameModes.style.display = 'none';
+        }
+    }
+
+    // Fullscreen button event listener
+    fullscreenButton.addEventListener('click', () => {
+        toggleFullscreen(gameArea);
+    });
+
+    // Event listener for Play PvP button
+    playVsButton.addEventListener('click', () => {
+        alert('PvP mode starting...');
+        // Start the PvP game mode logic
+    });
+
+    // Event listener for Play Map Mode (Bots)
+    playMapButton.addEventListener('click', () => {
+        alert('Map Mode with Bots starting...');
+        // Start the Map mode with bots logic
+        // Increase difficulty each time a level is beaten
+    });
+
+    // Event listener for Shop button
+    shopButton.addEventListener('click', () => {
+        alert('Opening the Shop...');
+        // Open the shop functionality for purchasing items or upgrades
+    });
+
+    // Sign In button event listener
+    signinButton.addEventListener('click', () => {
+        alert('Sign In feature coming soon...');
+        // Add logic to open the sign-in form or authentication flow
+    });
+
+    // Sign Up button event listener
+    signupButton.addEventListener('click', () => {
+        alert('Sign Up feature coming soon...');
+        // Add logic to open the sign-up form or authentication flow
+    });
+</script>
+
+</body>
+</html>
