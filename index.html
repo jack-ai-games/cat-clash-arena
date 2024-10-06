@@ -3,146 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Cat Clash Arena - Compete with players, team up, and rise on the leaderboard!">
     <title>Cat Clash Arena</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-        }
-        header {
-            background-color: #4CAF50;
-            padding: 1rem;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-        section {
-            padding: 1.5rem;
-        }
-        h1, h2 {
-            color: #333;
-        }
-        .game-area {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 1rem;
-            margin: 1rem 0;
-            text-align: center;
-        }
-        .leaderboard, .ads {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 1rem;
-            margin: 1rem 0;
-        }
-        .ads {
-            background-color: #fafafa;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background-color: #333;
-            color: white;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        #fullscreen-btn {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .game-modes {
-            margin: 1rem 0;
-        }
-        .game-modes button {
-            padding: 10px 20px;
-            margin: 0.5rem;
-            background-color: #008CBA;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .shop-btn {
-            background-color: #FFA500;
-            padding: 10px 20px;
-            margin: 0.5rem;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .auth-buttons {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-        }
-        .auth-buttons button {
-            padding: 10px;
-            margin-left: 10px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        .auth-buttons button.signup {
-            background-color: #28A745;
-        }
-    </style>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-analytics.js"></script>
+    
+    <!-- Your custom script for Firebase initialization -->
+    <script>
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBuhqwV30ASPr3lK4lvQLTI4BsDmrue5jk",
+        authDomain: "cat-clash-arena.firebaseapp.com",
+        projectId: "cat-clash-arena",
+        storageBucket: "cat-clash-arena.appspot.com",
+        messagingSenderId: "469468790316",
+        appId: "1:469468790316:web:bbc6f8e4f3d2ff1d8f9b89",
+        measurementId: "G-7VKYPTR5HX"
+      };
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const analytics = firebase.analytics();
+    </script>
 </head>
 <body>
-
-<header>
     <h1>Welcome to Cat Clash Arena</h1>
-    <p>Team up, compete, or challenge bots in map mode!</p>
+    <p>This is your game. Make sure to sign in to save your progress!</p>
+
+    <!-- Add any additional game content or scripts here -->
+
+    <!-- Game Area -->
+    <div id="game-area">
+      <!-- Your game content or canvas will be placed here -->
+    </div>
 
     <!-- Sign In and Sign Up Buttons -->
     <div class="auth-buttons">
-        <button id="signin-btn">Sign In</button>
-        <button id="signup-btn" class="signup">Sign Up</button>
-    </div>
-</header>
-
-<!-- Game Area -->
-<section class="game-area" id="game-area">
-    <h2>Main Game Screen</h2>
-    <p>Choose your mode and start playing!</p>
-
-    <!-- Game Modes -->
-    <div class="game-modes">
-        <button id="play-vs-btn">Play PvP</button>
-        <button id="play-map-btn">Map Mode (Bots)</button>
-        <button class="shop-btn" id="shop-btn">Shop</button>
+      <button id="signin-btn">Sign In</button>
+      <button id="signup-btn" class="signup">Sign Up</button>
     </div>
 
-    <!-- Fullscreen Button -->
-    <button id="fullscreen-btn">Go Fullscreen</button>
-</section>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-auth.js"></script>
+    <script>
+      // Firebase Authentication initialization and logic
+      const auth = firebase.auth();
 
-<!-- Leaderboard Section -->
-<section class="leaderboard">
-    <h2>Player Leaderboard</h2>
-    <p>Check out the top players dominating the arena:</p>
-    <ul>
-        <li>Player 1 - 1200 points</li>
-        <li>Player 2 - 1150 points</li>
-        <li>Player 3 - 1100 points</li>
-        <!-- Add more players dynamically -->
-    </ul>
-</section>
+      // Reference to your sign-in and sign-up buttons
+      const signinBtn = document.getElementById('signin-btn');
+      const signupBtn = document.getElementById('signup-btn');
 
-<!-- Sponsored Ads -->
-<section class="ads">
-    <h2>Sponsored Ads</h2>
-    <p>We keep the ads minimal! Check out these cool offers:</p>
-    <div class="ad">
-        <p><a href="#">Ad 1 - Amazing Deal on Cat Supplies!</a></p>
-    </div>
-    <div class="ad">
-        <p><a href="#">Ad 2 - Join our game tournaments for extra prizes
+      // Sign in functionality
+      signinBtn.addEventListener('click', () => {
+        const email = prompt('Enter your email:');
+        const password = prompt('Enter your password:');
 
-        
+        auth.signInWithEmailAndPassword(email, password)
+          .then(userCredential => {
+            alert('Welcome back, ' + userCredential.user.email);
+          })
+          .catch(error => {
+            alert('Error: ' + error.message);
+          });
+      });
+
+      // Sign up functionality
+      signupBtn.addEventListener('click', () => {
+        const email = prompt('Enter your email:');
+        const password = prompt('Enter your password:');
+
+        auth.createUserWithEmailAndPassword(email, password)
+          .then(userCredential => {
+            alert('Account created for: ' + userCredential.user.email);
+          })
+          .catch(error => {
+            alert('Error: ' + error.message);
+          });
+      });
+    </script>
+</body>
+</html>
