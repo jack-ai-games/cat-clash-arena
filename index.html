@@ -17,6 +17,7 @@
             padding: 1rem;
             text-align: center;
             color: white;
+            position: relative;
         }
         section {
             padding: 1.5rem;
@@ -75,6 +76,22 @@
             border: none;
             cursor: pointer;
         }
+        .auth-buttons {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        .auth-buttons button {
+            padding: 10px;
+            margin-left: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .auth-buttons button.signup {
+            background-color: #28A745;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +99,12 @@
 <header>
     <h1>Welcome to Cat Clash Arena</h1>
     <p>Team up, compete, or challenge bots in map mode!</p>
+
+    <!-- Sign In and Sign Up Buttons -->
+    <div class="auth-buttons">
+        <button id="signin-btn">Sign In</button>
+        <button id="signup-btn" class="signup">Sign Up</button>
+    </div>
 </header>
 
 <!-- Game Area -->
@@ -120,58 +143,6 @@
         <p><a href="#">Ad 1 - Amazing Deal on Cat Supplies!</a></p>
     </div>
     <div class="ad">
-        <p><a href="#">Ad 2 - Join our game tournaments for extra prizes!</a></p>
-    </div>
-</section>
+        <p><a href="#">Ad 2 - Join our game tournaments for extra prizes
 
-<footer>
-    <p>Cat Clash Arena &copy; 2024</p>
-    <p>Follow us on <a href="#">Twitter</a> | <a href="#">Instagram</a></p>
-</footer>
-
-<!-- JavaScript for Fullscreen, Shop, and Game Modes -->
-<script>
-    const fullscreenButton = document.getElementById('fullscreen-btn');
-    const gameArea = document.getElementById('game-area');
-    const playVsButton = document.getElementById('play-vs-btn');
-    const playMapButton = document.getElementById('play-map-btn');
-    const shopButton = document.getElementById('shop-btn');
-
-    // Fullscreen toggle function
-    function toggleFullscreen(element) {
-        if (!document.fullscreenElement) {
-            element.requestFullscreen().catch(err => {
-                alert(`Error attempting to enable full-screen mode: ${err.message}`);
-            });
-        } else {
-            document.exitFullscreen();
-        }
-    }
-
-    // Fullscreen button event listener
-    fullscreenButton.addEventListener('click', () => {
-        toggleFullscreen(gameArea);
-    });
-
-    // Event listener for Play PvP button
-    playVsButton.addEventListener('click', () => {
-        alert('PvP mode starting...');
-        // Start the PvP game mode logic
-    });
-
-    // Event listener for Play Map Mode (Bots)
-    playMapButton.addEventListener('click', () => {
-        alert('Map Mode with Bots starting...');
-        // Start the Map mode with bots logic
-        // Increase difficulty each time a level is beaten
-    });
-
-    // Event listener for Shop button
-    shopButton.addEventListener('click', () => {
-        alert('Opening the Shop...');
-        // Open the shop functionality for purchasing items or upgrades
-    });
-</script>
-
-</body>
-</html>
+        
