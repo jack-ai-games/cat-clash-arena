@@ -31,6 +31,7 @@
             padding: 1rem;
             margin: 1rem 0;
             text-align: center;
+            position: relative;
         }
         .leaderboard, .ads {
             background-color: #fff;
@@ -56,9 +57,22 @@
             color: white;
             border: none;
             cursor: pointer;
+            position: relative;
+        }
+        .exit-fullscreen-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: none; /* Initially hidden */
         }
         .game-modes {
             margin: 1rem 0;
+            display: none; /* Initially hidden */
         }
         .game-modes button {
             padding: 10px 20px;
@@ -92,11 +106,6 @@
         .auth-buttons button.signup {
             background-color: #28A745;
         }
-
-        /* Initially hide the game modes buttons */
-        .game-modes {
-            display: none;
-        }
     </style>
 </head>
 <body>
@@ -119,6 +128,7 @@
 
     <!-- Fullscreen Button -->
     <button id="fullscreen-btn">Go Fullscreen</button>
+    <button id="exit-fullscreen-btn" class="exit-fullscreen-btn">Exit Fullscreen</button>
 
     <!-- Game Modes (Initially Hidden) -->
     <div class="game-modes" id="game-modes">
@@ -160,6 +170,7 @@
 <!-- JavaScript for Fullscreen, Shop, and Game Modes -->
 <script>
     const fullscreenButton = document.getElementById('fullscreen-btn');
+    const exitFullscreenButton = document.getElementById('exit-fullscreen-btn');
     const gameArea = document.getElementById('game-area');
     const gameModes = document.getElementById('game-modes');
     const playVsButton = document.getElementById('play-vs-btn');
@@ -174,27 +185,37 @@
     function toggleFullscreen(element) {
         if (!document.fullscreenElement) {
             element.requestFullscreen().then(() => {
-                // Show game modes and hide the fullscreen button and instructions
-                gameModes.style.display = 'block';
+                // Hide fullscreen button and instruction text, show exit button and game modes
                 fullscreenButton.style.display = 'none';
+                exitFullscreenButton.style.display = 'block';
                 mainText.style.display = 'none';
                 instructionText.style.display = 'none';
+                gameModes.style.display = 'block';
             }).catch(err => {
                 alert(`Error attempting to enable full-screen mode: ${err.message}`);
             });
         } else {
             document.exitFullscreen();
-            // Hide game modes when exiting fullscreen
-            gameModes.style.display = 'none';
-            fullscreenButton.style.display = 'block';
-            mainText.style.display = 'block';
-            instructionText.style.display = 'block';
         }
     }
 
     // Fullscreen button event listener
     fullscreenButton.addEventListener('click', () => {
         toggleFullscreen(gameArea);
+    });
+
+    // Exit fullscreen event listener
+    exitFullscreenButton.addEventListener('click', () => {
+        document.exitFullscreen().then(() => {
+            // Show fullscreen button and instruction text, hide exit button and game modes
+            fullscreenButton.style.display = 'block';
+            exitFullscreenButton.style.display = 'none';
+            mainText.style.display = 'block';
+            instructionText.style.display = 'block';
+            gameModes.style.display = 'none';
+        }).catch(err => {
+            alert(`Error attempting to exit full-screen mode: ${err.message}`);
+        });
     });
 
     // Event listener for Play PvP button
@@ -231,4 +252,3 @@
 
 </body>
 </html>
-
