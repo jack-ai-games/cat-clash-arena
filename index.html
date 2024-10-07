@@ -114,8 +114,8 @@
 
 <!-- Game Area -->
 <section class="game-area" id="game-area">
-    <h2>Main Game Screen</h2>
-    <p>Click "Go Fullscreen" to reveal game modes and start playing!</p>
+    <h2 id="main-text">Main Game Screen</h2>
+    <p id="instruction-text">Click "Go Fullscreen" to reveal game modes and start playing!</p>
 
     <!-- Fullscreen Button -->
     <button id="fullscreen-btn">Go Fullscreen</button>
@@ -167,13 +167,18 @@
     const shopButton = document.getElementById('shop-btn');
     const signinButton = document.getElementById('signin-btn');
     const signupButton = document.getElementById('signup-btn');
+    const mainText = document.getElementById('main-text');
+    const instructionText = document.getElementById('instruction-text');
 
     // Fullscreen toggle function
     function toggleFullscreen(element) {
         if (!document.fullscreenElement) {
             element.requestFullscreen().then(() => {
-                // Show game modes when fullscreen is activated
+                // Show game modes and hide the fullscreen button and instructions
                 gameModes.style.display = 'block';
+                fullscreenButton.style.display = 'none';
+                mainText.style.display = 'none';
+                instructionText.style.display = 'none';
             }).catch(err => {
                 alert(`Error attempting to enable full-screen mode: ${err.message}`);
             });
@@ -181,6 +186,9 @@
             document.exitFullscreen();
             // Hide game modes when exiting fullscreen
             gameModes.style.display = 'none';
+            fullscreenButton.style.display = 'block';
+            mainText.style.display = 'block';
+            instructionText.style.display = 'block';
         }
     }
 
@@ -223,3 +231,4 @@
 
 </body>
 </html>
+
